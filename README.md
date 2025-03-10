@@ -6,7 +6,7 @@ This project is a Laravel application that utilizes **Inertia.js** to build a se
 ## 🛠 Tech Stack
 - **Laravel** - Backend Framework
 - **Inertia.js** - Bridge between Laravel & Frontend
-- **React/Vue.js** - Frontend (Choose one based on preference)
+- **React JS** - Frontend (Choose one based on preference)
 - **TailwindCSS** - Styling (optional but recommended)
 - **MySQL/PostgreSQL** - Database
 
