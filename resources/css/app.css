@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-confirm-button {
+    width: 100% !important; /* Buat tombol penuh */
+    min-width: 350px !important; /* Minimal ukuran tombol */
+    max-width: 750px !important; /* Maksimal ukuran tombol di desktop */
+    padding: 12px 24px !important; /* Padding biar lebih nyaman */
+    font-size: 18px !important; /* Perbesar font */
+    background-color: #14532d !important; /* Warna hijau tua */
+    color: white !important; /* Warna teks */
+    border-radius: 8px !important; /* Bikin tombol lebih rounded */
+    border: none !important; /* Hapus border default */
+    display: flex !important; /* Pastikan tombol responsif */
+    align-items: center !important; /* Rata tengah vertikal */
+    justify-content: center !important; /* Rata tengah horizontal */
+    text-align: center !important; /* Pastikan teks rata tengah */
+    margin: 0 auto !important; /* Agar tetap di tengah */
+}
+
+.custom-confirm-button:hover {
+    background-color: #166534 !important; /* Ubah warna saat hover */
+}
+
+/* Scrollbar custom hanya untuk tampilan mobile */
+@media (max-width: 768px) {
+    .custom-scrollbar {
+        overflow-x: auto; /* Memastikan scrollbar muncul */
+        scrollbar-width: thin; /* Untuk Firefox */
+        scrollbar-color: #eac50c #ffedd5; /* Warna thumb dan track */
+    }
+
+    /* Scrollbar untuk Chrome, Edge, Safari */
+    .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #ffedd5; /* Warna latar belakang orange muda */
+        border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #ea580c; /* Warna orange */
+        border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #c2410c; /* Warna lebih gelap saat hover */
+    }
+}
+.custom-scroll {
+    overflow-x: auto; /* Memastikan scrollbar muncul */
+    scrollbar-width: thin; /* Untuk Firefox */
+    scrollbar-color: #eac50c #ffedd5; /* Warna thumb dan track */
+}
+
+/* Scrollbar untuk Chrome, Edge, Safari */
+.custom-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: #ffedd5; /* Warna latar belakang orange muda */
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #ea580c; /* Warna orange */
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #c2410c; /* Warna lebih gelap saat hover */
+}
+
+/* Pastikan hanya ada scrollbar horizontal */
+.table-container {
+    overflow-x: auto; /* Hanya horizontal */
+    white-space: nowrap; /* Hindari wrap pada tabel */
+    scrollbar-width: thin; /* Untuk Firefox */
+    scrollbar-color: #eac50c #ffedd5; /* Warna scrollbar */
+}
+
+/* Custom scrollbar untuk Chrome, Edge, dan Safari */
+.table-container::-webkit-scrollbar {
+    height: 8px; /* Scrollbar horizontal */
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #ffedd5; /* Warna track */
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #ea580c; /* Warna scrollbar */
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #c2410c; /* Warna lebih gelap saat hover */
+}
+
+.custom-confirm-button-cash {
+    width: 100% !important; /* Buat tombol penuh */
+    min-width: 350px !important; /* Minimal ukuran tombol */
+    max-width: 400px !important; /* Maksimal ukuran tombol di desktop */
+    padding: 12px 24px !important; /* Padding biar lebih nyaman */
+    font-size: 18px !important; /* Perbesar font */
+    background-color: #14532d !important; /* Warna hijau tua */
+    color: white !important; /* Warna teks */
+    border-radius: 8px !important; /* Bikin tombol lebih rounded */
+    border: none !important; /* Hapus border default */
+    display: flex !important; /* Pastikan tombol responsif */
+    align-items: center !important; /* Rata tengah vertikal */
+    justify-content: center !important; /* Rata tengah horizontal */
+    text-align: center !important; /* Pastikan teks rata tengah */
+    margin: 0 auto !important; /* Agar tetap di tengah */
+}
+.custom-cancel-button-cash {
+    width: 100% !important; /* Buat tombol penuh */
+    min-width: 350px !important; /* Minimal ukuran tombol */
+    max-width: 400px !important; /* Maksimal ukuran tombol di desktop */
+    padding: 12px 24px !important; /* Padding biar lebih nyaman */
+    font-size: 18px !important; /* Perbesar font */
+    background-color: #f13838 !important; /* Warna hijau tua */
+    color: white !important; /* Warna teks */
+    border-radius: 8px !important; /* Bikin tombol lebih rounded */
+    border: none !important; /* Hapus border default */
+    display: flex !important; /* Pastikan tombol responsif */
+    align-items: center !important; /* Rata tengah vertikal */
+    justify-content: center !important; /* Rata tengah horizontal */
+    text-align: center !important; /* Pastikan teks rata tengah */
+    margin: 0 auto !important; /* Agar tetap di tengah */
+}
+
+.custom-actions-cash {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important; /* Jarak antar tombol */
+    width: 85% !important;
+}
+
+table {
+    border-collapse: collapse !important;
+}
+
+th,
+td {
+    border: 1px solid black !important;
+}
