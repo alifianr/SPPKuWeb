@@ -36,6 +36,7 @@ export default function NavbarDashboard() {
         }).then((result) => {
             if (result.isConfirmed) {
                 Inertia.post(route('logout.admin'), {}, {
+                    preserveScroll: true,
                     onSuccess: () => {
                         Swal.fire({
                             title: "Logout Berhasil!",
@@ -44,9 +45,19 @@ export default function NavbarDashboard() {
                             timer: 2000,
                             showConfirmButton: false
                         });
+
+                        // Redirect setelah logout tanpa error re-render
                         setTimeout(() => {
                             window.location.href = "/admin/login";
                         }, 2000);
+                    },
+                    onError: () => {
+                        Swal.fire({
+                            title: "Logout Gagal!",
+                            text: "Terjadi kesalahan saat logout. Coba lagi!",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
                 });
             }

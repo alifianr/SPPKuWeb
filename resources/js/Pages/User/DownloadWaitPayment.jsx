@@ -98,7 +98,7 @@ export default function DownloadWaitPayment() {
                                     <th className="py-2 px-4 border-b border-gray-200 text-black whitespace-nowrap">Metode Pembayaran</th>
                                     <th className="py-2 px-4 border-b border-gray-200 text-black whitespace-nowrap">Status Pembayaran</th>
                                     <th className="py-2 px-4 border-b border-gray-200 text-black whitespace-nowrap">Tahun Ajaran</th>
-                                    <th className="py-2 px-4 border-b border-gray-200 text-black whitespace-nowrap">Action</th>
+                                    <th className="py-2 px-4 border-b border-gray-200 text-black whitespace-nowrap">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -68,6 +68,36 @@ class PaymentDashboardController extends Controller
             "keterangan" => "-",
         ]
     ];
+    private $paymentLunas = [
+        [
+            "invoice" => "1234567WXY89Z",
+            "date" => "24/05/2024",
+            "description" => "SPP Mei",
+            "amount" => "500.000",
+            "method" => "Alfamart",
+            "status" => "Lunas",
+            "year" => "2023/2024",
+            "student_nisn" => "202123456",
+            "student_name" => "Zahra Aurira Hanifah",
+            "student_class" => "11 IPA 1",
+            "student_category" => "Reguler",
+            "keterangan" => "Terlambat 4 Hari",
+        ],
+        [
+            "invoice" => "1234567ABC89D",
+            "date" => "24/06/2024",
+            "description" => "SPP Juni",
+            "amount" => "500.000",
+            "method" => "Alfamart",
+            "status" => "Lunas",
+            "year" => "2023/2024",
+            "student_nisn" => "202123456",
+            "student_name" => "Zahra Aurira Hanifah",
+            "student_class" => "11 IPA 1",
+            "student_category" => "Reguler",
+            "keterangan" => "Terlambat 4 Hari",
+        ]
+    ];
     public function index()
     {
         $payments = [
@@ -135,6 +165,20 @@ class PaymentDashboardController extends Controller
             'payment' => $payment
         ]);
     }
+    public function viewPaymentFinish($invoice)
+    {
+        // Ambil data pembayaran berdasarkan invoice
+        $payment = collect($this->paymentLunas)->firstWhere('invoice', $invoice);
+
+        // Jika data tidak ditemukan, kembalikan error 404 atau halaman tidak ditemukan
+        if (!$payment) {
+            return abort(404, "Invoice tidak ditemukan");
+        }
+
+        return Inertia::render('User/ViewPaymentFinish', [
+            'payment' => $payment
+        ]);
+    }
     public function pay()
     {
         $payment = [
@@ -197,6 +241,46 @@ class PaymentDashboardController extends Controller
 
         return Inertia::render('User/UserMenungguPembayaran2', [
             'payments' => $payments
+        ]);
+    }
+    public function paymentLunas()
+    {
+        $payments = [
+            ["id" => 1, "invoice" => "1234567ZXV891", "date" => "24/01/2024", "description" => "SPP Januari", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024"],
+            ["id" => 2, "invoice" => "1234567MNO89P", "date" => "24/02/2024", "description" => "SPP Februari", "amount" => "500.000", "method" => "BRI", "status" => "Lunas", "year" => "2023/2024"],
+            ["id" => 3, "invoice" => "1234567YUD9MK", "date" => "24/03/2024", "description" => "SPP Maret", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024"],
+            ["id" => 4, "invoice" => "1234UIWXY89CE", "date" => "24/04/2024", "description" => "SPP April", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024"],
+            ["id" => 5, "invoice" => "1234567WXY89Z", "date" => "24/05/2024", "description" => "SPP Mei", "amount" => "500.000", "method" => "Alfamart", "status" => "Lunas", "year" => "2023/2024"],
+            ["id" => 6, "invoice" => "1234567ABC89D", "date" => "24/06/2024", "description" => "SPP Juni", "amount" => "500.000", "method" => "Alfamart", "status" => "Lunas", "year" => "2023/2024"],
+        ];
+
+        return Inertia::render('User/UserPembayaranLunas', [
+            'payments' => $payments
+        ]);
+    }
+    public function paymentLunasDownload()
+    {
+        $dataSiswa = [
+            [
+                "student_nisn" => "202123456",
+                "student_name" => "Zahra Aurira Hanifah",
+                "student_class" => "11 IPA 1",
+                "student_category" => "Reguler",
+                "expiry_date" => now()->addHours(24)->toDateTimeString(),
+            ],
+        ];
+        $payments = [
+            ["id" => 1, "invoice" => "1234567ZXV891", "date" => "24/01/2024", "description" => "SPP Januari", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "Terlambat 1 Hari"],
+            ["id" => 2, "invoice" => "1234567MNO89P", "date" => "24/02/2024", "description" => "SPP Februari", "amount" => "500.000", "method" => "BRI", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "Tepat Waktu"],
+            ["id" => 3, "invoice" => "1234567YUD9MK", "date" => "24/03/2024", "description" => "SPP Maret", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "Tepat Waktu"],
+            ["id" => 4, "invoice" => "1234UIWXY89CE", "date" => "24/04/2024", "description" => "SPP April", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "Terlambat 2 bulan"],
+            ["id" => 5, "invoice" => "1234567WXY89Z", "date" => "24/05/2024", "description" => "SPP Mei", "amount" => "500.000", "method" => "Alfamart", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "Terlambat 1 bulan"],
+            ["id" => 6, "invoice" => "1234567ABC89D", "date" => "24/06/2024", "description" => "SPP Juni", "amount" => "500.000", "method" => "Alfamart", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "Terlambat 4 Hari"],
+        ];
+
+        return Inertia::render('User/DownloadPaymentFinish', [
+            'payment' => $payments,
+            'data' => $dataSiswa
         ]);
     }
     public function lihatStatus()
@@ -265,12 +349,12 @@ class PaymentDashboardController extends Controller
         ];
 
         $payments = [
-            ["id" => 1, "invoice" => "1234567ZXV891", "date" => "24/01/2024", "description" => "SPP Januari", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024"],
-            ["id" => 2, "invoice" => "1234567MNO89P", "date" => "24/02/2024", "description" => "SPP Februari", "amount" => "500.000", "method" => "BRI", "status" => "Lunas", "year" => "2023/2024"],
-            ["id" => 3, "invoice" => "1234567YUD9MK", "date" => "24/03/2024", "description" => "SPP Maret", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024"],
-            ["id" => 4, "invoice" => "1234UIWXY89CE", "date" => "24/04/2024", "description" => "SPP April", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024"],
-            ["id" => 5, "invoice" => "1234567WXY89Z", "date" => "24/05/2024", "description" => "SPP Mei", "amount" => "500.000", "method" => "Alfamart", "status" => "Menunggu Pembayaran", "year" => "2023/2024"],
-            ["id" => 6, "invoice" => "1234567ABC89D", "date" => "24/06/2024", "description" => "SPP Juni", "amount" => "500.000", "method" => "Alfamart", "status" => "Menunggu Pembayaran", "year" => "2023/2024"],
+            ["id" => 1, "invoice" => "1234567ZXV891", "date" => "24/01/2024", "description" => "SPP Januari", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "-"],
+            ["id" => 2, "invoice" => "1234567MNO89P", "date" => "24/02/2024", "description" => "SPP Februari", "amount" => "500.000", "method" => "BRI", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "-"],
+            ["id" => 3, "invoice" => "1234567YUD9MK", "date" => "24/03/2024", "description" => "SPP Maret", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "-"],
+            ["id" => 4, "invoice" => "1234UIWXY89CE", "date" => "24/04/2024", "description" => "SPP April", "amount" => "500.000", "method" => "BCA", "status" => "Lunas", "year" => "2023/2024", "keterangan" => "-"],
+            ["id" => 5, "invoice" => "1234567WXY89Z", "date" => "24/05/2024", "description" => "SPP Mei", "amount" => "500.000", "method" => "Alfamart", "status" => "Menunggu Pembayaran", "year" => "2023/2024", "keterangan" => "-"],
+            ["id" => 6, "invoice" => "1234567ABC89D", "date" => "24/06/2024", "description" => "SPP Juni", "amount" => "500.000", "method" => "Alfamart", "status" => "Menunggu Pembayaran", "year" => "2023/2024", "keterangan" => "-"],
         ];
 
         return Inertia::render('User/DownloadWaitPayment', [

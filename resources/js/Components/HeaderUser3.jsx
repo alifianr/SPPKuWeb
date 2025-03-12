@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Inertia } from '@inertiajs/inertia';
 
-export default function HeaderUser2() {
+export default function HeaderUser3() {
     const { auth } = usePage().props;
     const [activeTab, setActiveTab] = useState(window.location.pathname);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -65,8 +65,8 @@ export default function HeaderUser2() {
                 <div className="hidden w-full md:flex justify-center">
                     <nav className="flex space-x-8 w-[70%]">
                         <Link
-                            href="/user/homepage"
-                            className={`flex-1 text-center px-4 py-2 font-bold rounded-full ${activeTab === "/user/homepage"
+                            href="/user/homepage-lunas"
+                            className={`flex-1 text-center px-4 py-2 font-bold rounded-full ${activeTab === "/user/homepage-lunas"
                                 ? "bg-green-700 text-white"
                                 : "border border-green-700 text-green-700 hover:outline hover:outline-2 hover:outline-green-900"
                                 }`}
@@ -75,8 +75,8 @@ export default function HeaderUser2() {
                         </Link>
 
                         <Link
-                            href="/user/pembayaran"
-                            className={`flex-1 text-center px-4 py-2 font-bold rounded-full ${["/user/pembayaran-spp", "/user/pembayaran"].includes(activeTab)
+                            href="/user/pembayaran-lunas"
+                            className={`flex-1 text-center px-4 py-2 font-bold rounded-full ${["/user/pembayaran-spp", "/user/pembayaran-lunas", "/user/pembayaran-lunas/menunggu"].includes(activeTab)
                                 ? "bg-green-700 text-white"
                                 : "border border-green-700 text-green-700 hover:outline hover:outline-2 hover:outline-green-900"
                                 }`}

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faStar, faTrash, faComments, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faStar, faTrash, faComments, faCalendarAlt, faComment, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import NavbarDashboard from '@/Components/NavbarDashboard';
 import Header from '@/Components/Header';
 import Paginator from '@/Components/Paginator';
+import Swal from 'sweetalert2';
 
 export default function Feedback() {
     const [search, setSearch] = useState("");
@@ -29,6 +30,24 @@ export default function Feedback() {
         return stars;
     };
 
+    const handleHapus = () => {
+        Swal.fire({
+            title: `Feedback User Berhasil Dihapus!`,
+            width: "800px",
+            imageUrl: "http://127.0.0.1:8000/img/CheckCircle.png",
+            imageWidth: 150,
+            imageHeight: 150,
+            confirmButtonText: "OK",
+            showCloseButton: true,
+            closeButtonHtml: '<span style="color: black; font-size: 40px;">&times;</span>',
+            timer: 3000, // Notifikasi otomatis hilang dalam 3 detik
+            timerProgressBar: true,
+            customClass: {
+                confirmButton: "custom-confirm-button" // Tambahkan class untuk styling tombol
+            },
+        });
+    }
+
     return (
         <div className="bg-gray-100 font-sans flex min-h-screen">
             <NavbarDashboard />
@@ -43,8 +62,8 @@ export default function Feedback() {
                         <FontAwesomeIcon icon={faStar} />
                         <span className="font-semibold text-black">4,8/5</span>
                     </div>
-                    <div className="flex items-center space-x-1 text-black">
-                        <FontAwesomeIcon icon={faComments} />
+                    <div className="flex items-center space-x-1 text-yellow-400">
+                        <FontAwesomeIcon icon={faCommentAlt} />
                         <span className="font-semibold text-black">300 Ulasan</span>
                     </div>
                 </div>
@@ -86,9 +105,10 @@ export default function Feedback() {
                                             <div className="flex justify-center items-center">{renderStars(feedback.rating)}</div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-center text-black">{feedback.message}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-center">
-                                            <button className="text-red-500 hover:text-red-700">
-                                                <FontAwesomeIcon icon={faTrash} /> Hapus
+                                        <td className="px-6 py-4 text-center">
+                                            <button className="text-red-500 hover:text-red-700" onClick={handleHapus}>
+                                                <img src="http://127.0.0.1:8000/img/delete.png" alt="" className="mx-auto" />
+                                                Hapus
                                             </button>
                                         </td>
                                     </tr>
