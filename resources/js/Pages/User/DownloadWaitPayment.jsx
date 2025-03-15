@@ -123,7 +123,7 @@ export default function DownloadWaitPayment() {
                         </table>
                     </div>
                     {/* Tombol Kembali */}
-                    <a href="/user/pembayaran-spp">
+                    <a href="/user/pembayaran">
                         <div className="text-center mx-auto w-full border border-green-800 rounded-lg py-3 mt-4 mb-10 text-xl font-bold hover:bg-green-600 hover:text-white">
                             Kembali
                         </div>

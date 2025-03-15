@@ -2,17 +2,22 @@ import NavbarDashboard from '@/Components/NavbarDashboard';
 import { useRef, useEffect, useState } from 'react';
 import Header from '@/Components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArchive, faCalendarAlt, faFilter, faPrint, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArchive, faCalendarAlt, faChevronDown, faFilter, faPlus, faPrint, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Paginator from '@/Components/Paginator';
 import '../../css/app.css';
 import Swal from 'sweetalert2';
 
 export default function KelolaSPP() {
+    const [modalOpen, setModalOpen] = useState(false);
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState("");
     const [activeTab, setActiveTab] = useState(window.location.pathname);
+    const [selectedKelas, setSelectedKelas] = useState("");
+    const [selectedBulan, setSelectedBulan] = useState("");
+    const [selectedTahun, setSelectedTahun] = useState("");
+    const [nominalPembayaran, setNominalPembayaran] = useState("");
     const [searchNama, setSearchNama] = useState("");
     const [searchNisn, setSearchNisn] = useState("");
     const tableContainerRef = useRef(null);
@@ -54,6 +59,28 @@ export default function KelolaSPP() {
         window.addEventListener("resize", updateThumbWidth);
         return () => window.removeEventListener("resize", updateThumbWidth);
     }, []);
+
+    const handleBuatSPP = () => {
+        setModalOpen(false);
+        event.preventDefault();
+        Swal.fire({
+            title: `Tambah Tagihan SPP Berhasil Dibuat`,
+            width: "800px",
+            imageUrl: "http://127.0.0.1:8000/img/CheckCircle.png",
+            imageWidth: 150,
+            imageHeight: 150,
+            confirmButtonText: "OK",
+            showCloseButton: true,
+            closeButtonHtml: '<span style="color: black; font-size: 40px;">&times;</span>',
+            timer: 3000, // Notifikasi otomatis hilang dalam 3 detik
+            timerProgressBar: true,
+            customClass: {
+                confirmButton: "custom-confirm-button" // Tambahkan class untuk styling tombol
+            },
+        }).then(() => {
+            window.location.href = "/spp/kelola-spp";
+        });
+    }
 
     // Menangani pergerakan scrollbar manual
     const handleMouseDown = (e) => {
@@ -229,13 +256,13 @@ export default function KelolaSPP() {
                         Filter
                         <FontAwesomeIcon icon={faFilter} className="mr-2" />
                     </button>
-                    <button className="min-w-56 bg-red-500 text-white mt-4 px-4 py-2 rounded flex items-center shadow hover:shadow-md">
-                        <FontAwesomeIcon icon={faArchive} className="mr-2" />
-                        Arsip Semua Data
+                    <button className="min-w-56 bg-yellow-500 text-white mt-4 px-4 py-2 rounded flex items-center shadow hover:shadow-md" onClick={() => setModalOpen(true)}>
+                        <FontAwesomeIcon icon={faPlus} className="mr-4" />
+                        Tambah Tagihan
                     </button>
-                    <button className="min-w-56 bg-green-800 text-white mt-4 px-4 py-2 rounded flex items-center shadow hover:shadow-md">
-                        <FontAwesomeIcon icon={faPrint} className="mr-2" />
-                        Cetak Semua Data
+                    <button className="min-w-56 bg-white text-green-800 mt-4 px-4 py-2 rounded flex items-center shadow hover:shadow-md">
+                        <FontAwesomeIcon icon={faPrint} className="mr-4" />
+                        Cetak Kelola SPP
                     </button>
                 </div>
                 {/* Hasil Filter yang Dipilih */}
@@ -311,6 +338,127 @@ export default function KelolaSPP() {
                                     <option key={index} value={kategori}>{kategori}</option>
                                 ))}
                             </select>
+                        </div>
+                    </div>
+                )}
+                {/* Modal Tambah Tagihan */}
+                {modalOpen && (
+                    <div
+                        className="fixed inset-0 bg-gray-300 bg-opacity-50 flex items-center justify-center z-[9999]"
+                        onClick={() => setModalOpen(false)}
+                    >
+                        <div
+                            className="bg-white p-6 rounded-lg shadow-lg w-[600px] border border-gray-300 relative"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Header Modal */}
+                            <div className="bg-yellow-400 p-4 rounded-t-lg flex justify-center relative">
+                                <h2 className="text-lg font-bold text-white">Tambah Tagihan</h2>
+                                <button
+                                    onClick={() => setModalOpen(false)}
+                                    className="absolute right-4 text-white text-xl"
+                                >
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </button>
+                            </div>
+
+                            {/* Form */}
+                            <form className="py-4">
+                                {/* Dropdown Kelas */}
+                                <label className="block text-black text-sm font-bold mb-2">Kelas</label>
+                                <div className="relative">
+                                    <select
+                                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 appearance-none text-black"
+                                        value={selectedKelas}
+                                        onChange={(e) => setSelectedKelas(e.target.value)}
+                                    >
+                                        <option value="">Pilih Kelas</option>
+                                        {kelasOptions.map((kelas) => (
+                                            <option key={kelas} value={kelas} className="text-black">
+                                                {kelas}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon
+                                        icon={faChevronDown}
+                                        className="absolute right-3 top-3 text-gray-400"
+                                    />
+                                </div>
+
+                                {/* Dropdown Bulan */}
+                                <label className="block text-black text-sm font-bold mt-4 mb-2">
+                                    Bulan Pembayaran SPP
+                                </label>
+                                <div className="relative">
+                                    <select
+                                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 appearance-none text-black"
+                                        value={selectedBulan}
+                                        onChange={(e) => setSelectedBulan(e.target.value)}
+                                    >
+                                        <option value="">Pilih Bulan Pembayaran SPP</option>
+                                        {bulanOptions.map((bulan) => (
+                                            <option key={bulan} value={bulan} className="text-black">
+                                                {bulan}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon
+                                        icon={faChevronDown}
+                                        className="absolute right-3 top-3 text-gray-400"
+                                    />
+                                </div>
+
+                                {/* Dropdown Tahun Ajaran */}
+                                <label className="block text-black text-sm font-bold mt-4 mb-2">
+                                    Tahun Ajaran Pembayaran SPP
+                                </label>
+                                <div className="relative">
+                                    <select
+                                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 appearance-none text-black"
+                                        value={selectedTahun}
+                                        onChange={(e) => setSelectedTahun(e.target.value)}
+                                    >
+                                        <option value="" className="">Pilih Tahun Ajaran</option>
+                                        {tahunOptions.map((tahun) => (
+                                            <option key={tahun} value={tahun} className="text-black">
+                                                {tahun}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon
+                                        icon={faChevronDown}
+                                        className="absolute right-3 top-3 text-gray-400"
+                                    />
+                                </div>
+
+                                {/* Input Nominal Pembayaran */}
+                                <label className="block text-black text-sm font-bold mt-4 mb-2">Nominal Pembayaran</label>
+                                <input
+                                    type="number"
+                                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 placeholder:text-black text-black"
+                                    placeholder="Masukan Nominal Pembayaran"
+                                    value={nominalPembayaran}
+                                    onChange={(e) => setNominalPembayaran(e.target.value)}
+                                />
+                                <label className="block text-black text-sm font-bold mt-4 mb-2">Batas Pembayaran</label>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 text-black pr-10"
+                                        placeholder="Masukkan Batas Pembayaran"
+                                        required
+                                    />
+                                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                                        <FontAwesomeIcon icon={faCalendarAlt} className="text-gray-400 mr-2" />
+                                    </div>
+                                </div>
+
+                                {/* Tombol Aksi */}
+                                <div className="mt-6 space-y-2">
+                                    <button className="w-full bg-green-900 font-bold text-white py-2 rounded" onClick={handleBuatSPP}>Buat</button>
+                                    <button className="w-full border border-green-700 font-bold text-green-700 py-2 rounded" onClick={() => setModalOpen(false)}>Batal</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 )}

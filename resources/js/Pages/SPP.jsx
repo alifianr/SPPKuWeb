@@ -105,14 +105,14 @@ export default function SPP() {
                     </button>
 
                     <button
-                        className="min-w-56 bg-yellow-500 text-white mt-4 px-4 py-2 rounded flex items-center"
+                        className="min-w-56 bg-yellow-500 text-white mt-4 px-4 py-2 rounded flex items-center shadow-md"
                         onClick={() => setModalOpen(true)}
                     >
                         <FontAwesomeIcon icon={faPlus} className="mr-2" />
                         Tambah Tagihan
                     </button>
 
-                    <button className="min-w-56 bg-white border border-green-700 font-bold text-green-800 mt-4 px-4 py-2 rounded flex items-center">
+                    <button className="min-w-56 bg-white border border-green-700 font-bold text-green-800 mt-4 px-4 py-2 rounded flex items-center shadow-md">
                         <FontAwesomeIcon icon={faPrint} className="mr-2" />
                         Cetak Kelola Data
                     </button>

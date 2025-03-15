@@ -11,7 +11,7 @@ export default function UserReview() {
 
     const handleSave = () => {
         Swal.fire({
-            text: "Ulasan Anda telah terkirim. Terima kasih telah berbagi pendapat Anda!",
+            title: "Ulasan Anda telah terkirim. Terima kasih telah berbagi pendapat Anda!",
             width: "800px",
             imageUrl: "http://127.0.0.1:8000/img/CheckCircle.png",
             imageWidth: 150,

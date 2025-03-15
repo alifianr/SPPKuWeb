@@ -66,11 +66,11 @@ export default function Dashboard({ auth }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[
                         { label: 'Siswa Terdaftar', value: '1.200', color: 'bg-green-700' },
-                        { label: 'Siswa Belum Membayar SPP', value: '300', color: 'bg-yellow-400' },
+                        { label: 'Siswa Belum Membayar SPP', value: '300', color: 'bg-green-700' },
                         { label: 'Siswa Sudah Membayar SPP', value: '900', color: 'bg-green-700' },
                     ].map((info, index) => (
                         <div key={index} className={`${info.color} p-6 text-white rounded-lg shadow-lg flex items-center`}>
-                            <FontAwesomeIcon icon={faUsers} className="text-gray-700 text-5xl mr-2" />
+                            <img src="http://127.0.0.1:8000/img/Users-yellow.png" alt="" className="w-16" />
                             <div className="ml-4">
                                 <h3 className="text-3xl font-bold">{info.value}</h3>
                                 <p>{info.label}</p>

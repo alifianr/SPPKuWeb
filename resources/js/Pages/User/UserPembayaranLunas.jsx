@@ -32,7 +32,7 @@ export default function UserPembayaran() {
 
     // Fungsi untuk mengarahkan ke halaman lihat detail pembayaran
     const handleView = (invoice) => {
-        Inertia.visit(`/user/lihat/${invoice}`);
+        Inertia.visit(`/user/lihat-pay-lunas/${invoice}`);
     };
 
     return (
@@ -105,7 +105,7 @@ export default function UserPembayaran() {
 
                 {/* Tombol Bayar Sekarang */}
                 <a href="/user/proses-pembayaran">
-                    <div className="w-full mt-6 flex justify-center bg-green-800 rounded-xl">
+                    <div className="w-full mt-6 flex justify-center bg-gray-300 rounded-xl cursor-not-allowed">
                         <h2 className="text-white px-6 py-3 rounded-lg text-lg">Bayar Sekarang</h2>
                     </div>
                 </a>

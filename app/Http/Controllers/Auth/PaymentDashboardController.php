@@ -179,6 +179,20 @@ class PaymentDashboardController extends Controller
             'payment' => $payment
         ]);
     }
+    public function downloadPaymentFinish($invoice)
+    {
+        // Ambil data pembayaran berdasarkan invoice
+        $payment = collect($this->paymentLunas)->firstWhere('invoice', $invoice);
+
+        // Jika data tidak ditemukan, kembalikan error 404 atau halaman tidak ditemukan
+        if (!$payment) {
+            return abort(404, "Invoice tidak ditemukan");
+        }
+
+        return Inertia::render('User/DownloadPembayaranFinish', [
+            'payment' => $payment
+        ]);
+    }
     public function pay()
     {
         $payment = [

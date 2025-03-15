@@ -19,7 +19,7 @@ export default function UserHomepageLunas() {
                     <p className="mt-4 text-black">
                         SPPku adalah website untuk pembayaran SPP sekolah dengan mudah, cepat, dan aman, memberikan kemudahan bagi orang tua dan siswa dalam mengelola kewajiban keuangan pendidikan.
                     </p>
-                    <Link href="/user/pembayaran" className="mt-6 text-center inline-block px-6 py-3 bg-green-700 text-white rounded-full w-11/12">
+                    <Link href="/user/pembayaran-lunas" className="mt-6 text-center inline-block px-6 py-3 bg-green-700 text-white rounded-full w-11/12">
                         Bayar SPP Sekarang
                     </Link>
                 </div>

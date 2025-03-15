@@ -3,14 +3,92 @@ import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/react";
 
 export default function UserLogin() {
-    const { errors } = usePage().props;
+    const { errors, flash } = usePage().props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         Inertia.post("/user/login", { email, password });
     };
+
+    const [showModal, setShowModal] = useState(true);
+
+    useEffect(() => {
+        if (flash?.emailValidated) {
+            setShowModal(true);
+            Swal.fire({
+                title: 'Email Terdaftar',
+                text: flash.passwordResetSuccess,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+        }
+    }, [flash?.emailValidated]);
+
+    useEffect(() => {
+        console.log("Flash message dari Laravel:", flash);
+        if (flash?.passwordResetSuccess) {
+            Swal.fire({
+                title: 'Selamat! Kata Sandi Anda Berhasil diubah!',
+                width: "800px",
+                imageUrl: "http://127.0.0.1:8000/img/CheckCircle.png",
+                imageWidth: 150,
+                imageHeight: 150,
+                imageAlt: "Check Icon",
+                confirmButtonText: 'Masuk',
+                customClass: {
+                    confirmButton: "custom-confirm-button" // Tambahkan kelas kustom
+                },
+                allowOutsideClick: false, // Agar user tidak bisa keluar dengan klik luar
+            }).then(() => {
+                window.location.href = "/user/login"; // Redirect setelah SweetAlert ditutup
+            });
+        }
+    }, [flash?.passwordResetSuccess]);
+
+    // STEP 1: Validasi Email
+    const handleValidateEmail = (e) => {
+        e.preventDefault();
+        Inertia.post("/forgot/password/validate-email", { email }, {
+            preserveState: false,
+            onSuccess: (page) => {
+                if (page.props.flash?.emailValidated) {
+                    setShowModal(true);
+                }
+            },
+            onError: (errors) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: errors.email || 'Terjadi kesalahan. Pastikan email sudah terdaftar.',
+                    icon: 'error',
+                    confirmButtonText: 'Coba Lagi'
+                });
+            }
+        });
+    };
+
+    // STEP 2: Ubah Password
+    const handleResetPassword = (e) => {
+        e.preventDefault();
+        Inertia.post("/forgot/password/reset", {
+            email,
+            password,
+            password_confirmation: passwordConfirmation,
+        }, {
+            preserveState: false,
+            onError: (errors) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: errors.password || 'Terjadi kesalahan. Pastikan semua data diisi dengan benar!',
+                    icon: 'error',
+                    confirmButtonText: 'Coba Lagi'
+                });
+            }
+        });
+    };
+
 
     return (
         <div className="bg-white min-h-screen">
@@ -85,6 +163,66 @@ export default function UserLogin() {
                             />
                         </div>
                     </div>
+                    {showModal && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                            <div className="bg-white border-2 border-green-700 rounded-lg shadow-lg w-full max-w-2xl relative mobile:w-11/12" style={{ position: "absolute", cursor: "move" }}>
+                                {/* Tombol Close Modal */}
+                                <div className="bg-yellow-400 p-2 flex flex-row-reverse justify-between justify-content-start items-center border-2 border-green-700 rounded-lg">
+                                    <button
+                                        onClick={() => setShowModal(false)}
+                                        className="text-gray-600 hover:text-white text-3xl font-bold mb-1 pr-2 hidden lg:block"
+                                    >
+                                        &times;
+                                    </button>
+
+                                    <h2 className="text-xl font-bold text-center text-green-900 mobile:text-lg mobile:text-white mobile:pl-2 lg:text-xl lg:pl-14">
+                                        Mohon ubah kata sandi untuk mengamankan akun Anda!
+                                    </h2>
+                                </div>
+                                {errors.password && (
+                                    <p className="text-red-500 text-center mb-2">{errors.password}</p>
+                                )}
+
+                                <form onSubmit={handleResetPassword} className="p-4">
+                                    {/* Email Hidden */}
+                                    <input type="hidden" name="email" value={email} readOnly />
+
+                                    <div className="mb-4">
+                                        <label className="block mb-1 font-semibold text-black">Kata Sandi Baru</label>
+                                        <input
+                                            type="password"
+                                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 text-black placeholder-gray-500"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                            placeholder="Masukkan Kata Sandi Baru Anda"
+                                        />
+                                        <p className="text-xs mt-2 text-gray-700">Pastikan kata sandi terdiri dari minimal 8 karakter dan mengandung huruf besar, huruf kecil, dan angka.</p>
+                                    </div>
+
+                                    <div className="mb-8">
+                                        <label className="block mb-1 font-semibold text-black">Konfirmasi Kata Sandi Baru</label>
+                                        <input
+                                            type="password"
+                                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 text-black placeholder-gray-500"
+                                            value={passwordConfirmation}
+                                            onChange={(e) => setPasswordConfirmation(e.target.value)}
+                                            required
+                                            placeholder="Konfirmasi Kata Sandi Baru Anda"
+                                        />
+                                        <p className="text-xs mt-2 text-gray-800">Pastikan kata sandi terdiri dari minimal 8 karakter dan mengandung huruf besar, huruf kecil, dan angka.</p>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-green-900 text-white font-extrabold text-lg px-6 py-3 rounded-lg hover:bg-green-800"
+                                    >
+                                        Ubah Kata Sandi
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

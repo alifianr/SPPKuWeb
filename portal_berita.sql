@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2025 at 04:52 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 15, 2025 at 08:47 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -272,8 +272,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('FfpN2uxO4JcUNDH0hpp48tbAsOC5m8XlVukhxBNG', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNUJmc0c3R0F2bUh0ampHRzJpZ2N6UzBpTVNLY0NKcWdSWTE1T054YiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Jpd2F5YXQtYmF5YXIvdW5kdWgtc2F0dSI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMzOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0O30=', 1741566915),
-('MQ6jW5trsjf78ixGjTLZgvhcOKo9CSWm9WNAo99r', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVzgxOWF4NTc0RFY0MDNCRFE1bzVTNzVqYnE2eXpnSnhjUWd0R2d2RiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yaXdheWF0LWJheWFyL3VuZHVoLXNhdHUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0O30=', 1741539715);
+('AZrdMTrMgFNWTemEppAop5jvsdebjy5d4x9VsR97', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUmJwQ3VNajhUYm5pVWNKV1FmWm1PN2lWekFuSHFpTURJeVZ5YmxuayI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3VzZXIvcGVtYmF5YXJhbiI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1741827602),
+('BCPj0uUun5Mtys18eUOGbuHIo1FL23ihX1Ma6jME', 5, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibUl4NEF0ZDNVanJ3aEYyTU9vZGlucnI3cTB6TW5oRVJyUDBtUmJaaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjU7fQ==', 1741813273),
+('TFLiGBoE2KOeVDSWUlYv4UkzVUaEFBenQ2UAwida', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUFZyeTBKenpRaWQ0NUtkdm5VRmVjNndZZWxDUzBLbTRqZzZucDFVNiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL3BlbWJheWFyYW4iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0O30=', 1741813473);
 
 -- --------------------------------------------------------
 
@@ -298,9 +299,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(3, 'Reza Hakim', 'reza@gmail.com', NULL, '$2y$12$40Jzx9mEX3rhz6g1icPn3OnfR8UaqxI.hN7dg3zMKgM.pkr8dkgly', NULL, '2024-10-19 19:55:43', '2024-10-19 19:55:43', 'user'),
 (4, 'Admin', 'admin@gmail.com', NULL, '$2y$12$KNb0/xeQO6bONz4v0J4PaOZ0o/3y.EEZjDCpeW2SjpJsz70SIxLwm', NULL, '2025-02-04 00:40:44', '2025-02-04 00:40:44', 'admin'),
-(5, 'Test', 'test@gmail.com', NULL, '$2y$12$jYx4G/7WOLg0BKbX8ar4tefrX0UIyy3ldpCmLAnyaEmnCMRHT9nn6', NULL, '2025-02-20 21:12:42', '2025-02-22 22:48:11', 'user');
+(5, 'Test', 'test@gmail.com', NULL, '$2y$12$UFU8Ha/aDh/GaxI5s7NICuz97ixmPwz.uP5nt369gX1B/77Mirf2u', NULL, '2025-02-20 21:12:42', '2025-03-12 14:02:25', 'user');
 
 --
 -- Indexes for dumped tables

@@ -34,7 +34,7 @@ export default function HeaderUser2() {
     // Fungsi Logout dengan Inertia.js
     const handleLogout = (e) => {
         e.preventDefault();
-        Inertia.post(route("logout"), {}, {
+        Inertia.post(route("user.logout"), {}, {
             onSuccess: () => {
                 setIsDropdownOpen(false);
             }

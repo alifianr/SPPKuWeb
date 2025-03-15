@@ -20,6 +20,9 @@ Route::get('/admin/login', [AuthenticatedSessionController::class, 'createAdmin'
 Route::post('/admin/login', [AuthenticatedSessionController::class, 'storeAdmin']) // Panggil storeAdmin()
     ->name('admin.login.submit');
 
+Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroyAdmin'])->name('logout.admin');
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Dashboard');
@@ -72,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/lihat/{invoice}', [PaymentDashboardController::class, 'view'])->name('user.lihat');
     Route::get('/user/lihat-{invoice}', [PaymentDashboardController::class, 'viewAfterPayment'])->name('user.viewAfterPay');
     Route::get('/user/download-lunas/{invoice}', [PaymentDashboardController::class, 'viewPaymentFinish'])->name('user.viewPayFinish');
+    Route::get('/user/lihat-pay-lunas/{invoice}', [PaymentDashboardController::class, 'downloadPaymentFinish'])->name('user.downloadPayFinish');
     Route::get('/user/proses-pembayaran', [PaymentDashboardController::class, 'pay'])->name('user.bayar');
     Route::get('/user/metode-pembayaran', [PaymentDashboardController::class, 'paymentMethod'])->name('user.method-payment');
     Route::get('/user/konfirmasi-pembayaran', [PaymentDashboardController::class, 'paymentConfirmation'])->name('user.confirm-payment');
@@ -113,9 +117,9 @@ Route::middleware(['guest', 'web'])->group(function () {
 });
 
 // // ===== ROUTE UNTUK PERCOBAAAN =====
-// Route::get('/', [AuthenticatedSessionController::class, 'create'])
-//     ->middleware('guest')
-//     ->name('login');
+Route::get('/', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest')
+    ->name('login');
 
 // Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 

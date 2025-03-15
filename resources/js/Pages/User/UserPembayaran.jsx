@@ -70,7 +70,7 @@ export default function UserPembayaran() {
                                     </td>
                                     <td className="py-2 px-4 border-b border-gray-200 text-black text-center mobile:text-[12px] lg:text-[16px]">{payment.year}</td>
                                     <td className="py-2 px-4 border-b border-gray-200 text-black flex space-x-2 mobile:text-[12px] lg:text-[16px]">
-                                        <button className="text-gray-600" onClick={() => handleDownload(payment.invoice)}>
+                                        <button className="text-gray-600" onClick={() => handleView(payment.invoice)}>
                                             <FontAwesomeIcon icon={faDownload} /> Download
                                         </button>
                                         <button className="text-gray-600" onClick={() => handleView(payment.invoice)}>

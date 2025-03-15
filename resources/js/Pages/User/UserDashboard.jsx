@@ -6,6 +6,7 @@ import HeaderUser from "@/Components/HeaderUser";
 
 export default function UserDashboard() {
     const { auth } = usePage().props; // Ambil data user yang sedang login
+    // State untuk mengontrol modal
 
     return (
         <div className="bg-gray-100 min-h-screen font-poppins mobile:px-6 lg:px-10">

@@ -76,7 +76,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/user/login');
     }
     public function destroyAdmin(Request $request)
     {
@@ -90,5 +90,13 @@ class AuthenticatedSessionController extends Controller
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);
+    }
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout(); // Pastikan guard sesuai
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/admin/login');
     }
 }
